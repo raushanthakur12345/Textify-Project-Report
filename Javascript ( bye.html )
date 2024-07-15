@@ -1,1 +1,48 @@
-
+<script> 
+  const audioInput = document.getElementById("user_file"); 
+  const audioPlayer = document.getElementById("audio_player"); 
+  const fileNameDisplay = 
+  document.getElementById("file_name"); 
+  audioInput.addEventListener("change", function () { 
+  const file = audioInput.files[0]; 
+  const audio = document.createElement("audio"); 
+  const source = document.createElement("source"); 
+  audio.controls = true; 
+        audio.style.display = "block"; 
+        source.src = URL.createObjectURL(file); 
+        source.type = file.type; 
+        audio.appendChild(source); 
+        audioPlayer.innerHTML = ""; 
+        audioPlayer.appendChild(audio); 
+        fileNameDisplay.textContent = `${file.name}`; 
+    }); 
+    const fileInput = document.getElementById("user_file"); 
+    const playerContainer = document.getElementById("player
+    container"); 
+    const fileName = document.getElementById("file-name"); 
+    fileInput.addEventListener("change", function () { 
+        const file = fileInput.files[0]; 
+        fileName.textContent = `${file.name}`; 
+        if (file.type.startsWith("audio")) { 
+            const audioPlayer = document.createElement("audio"); 
+            audioPlayer.controls = true; 
+            const source = document.createElement("source"); 
+            source.src = URL.createObjectURL(file); 
+            audioPlayer.appendChild(source); 
+            playerContainer.innerHTML = ""; 
+            playerContainer.appendChild(audioPlayer); 
+        } else if (file.type.startsWith("video")) { 
+            const videoPlayer = document.createElement("video"); 
+            videoPlayer.controls = true; 
+            videoPlayer.volume = 1; // Set volume to full (1) 
+            const source = document.createElement("source"); 
+            source.src = URL.createObjectURL(file); 
+            videoPlayer.appendChild(source); 
+            playerContainer.innerHTML = ""; 
+            playerContainer.appendChild(videoPlayer); 
+        } else { 
+            playerContainer.innerHTML = "Unsupported file 
+    format"; 
+        } 
+    }); 
+</script>
